@@ -6,3 +6,7 @@ yarn install
 
 # if you can't install, try:
 npm install --legacy-peer-deps
+
+
+pip install colorama
+8812
