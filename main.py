@@ -10,11 +10,9 @@ init(autoreset=True)
 # Cross-platform beep sound
 def beep():
     try:
-        # Windows
         import winsound
         winsound.Beep(1000, 200)
     except ImportError:
-        # Unix-like systems
         sys.stdout.write('\a')
         sys.stdout.flush()
 
@@ -30,13 +28,13 @@ ascii_art = r"""
 =(  _____| (_________|   W<
 """
 
-# Show ASCII Art in cyan
+# Show ASCII Art
 print(Fore.CYAN + ascii_art)
 
 # Welcome Message
 print(Fore.YELLOW + "\n🔧 Welcome to the AR Electronic Components Detector!\n")
 
-# Fancy Spinner Animation
+# Spinner Animation
 print(Fore.BLUE + "⏳ Initializing system, please wait...", end=" ", flush=True)
 spinner = ['|', '/', '-', '\\']
 for _ in range(20):
@@ -47,11 +45,12 @@ for _ in range(20):
         sys.stdout.write('\b')
 print("\n")
 
-# Set correct passcode and max attempts
-correct_passcode = "8812"
+# Passcode settings
+correct_passcode = "1234"
 max_attempts = 3
+granted = False
 
-# Retry logic
+# Retry loop
 for attempt in range(1, max_attempts + 1):
     print(Fore.LIGHTYELLOW_EX + f"Attempt {attempt}/{max_attempts}")
     entered_passcode = getpass("🔐 Enter 4-digit passcode (input hidden): ")
@@ -60,6 +59,7 @@ for attempt in range(1, max_attempts + 1):
         beep()
         print(Fore.GREEN + "\n✅ Access Granted! Welcome, Admin.")
         print(Fore.CYAN + "🔗 Project Link: https://hub.ultralytics.com/projects/KhQLcOGmbDeYFSbPNQig\n")
+        granted = True
         break
     else:
         beep()
@@ -68,3 +68,7 @@ for attempt in range(1, max_attempts + 1):
             print(Fore.YELLOW + "🔁 Please try again.\n")
         else:
             print(Fore.RED + "\n🚫 Maximum attempts reached. Access Denied.\n")
+
+# Hold terminal open for 300 seconds (5 minutes)
+print(Fore.LIGHTBLUE_EX + "⌛ Terminal will remain open for 5 minutes...")
+time.sleep(300)
